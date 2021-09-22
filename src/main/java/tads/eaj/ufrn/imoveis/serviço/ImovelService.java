@@ -23,13 +23,10 @@ public class ImovelService {
     }
 
     public Collection<ImovelResponse> listar(){
-        Collection<ImovelResponse> lista = new ArrayList<ImovelResponse>();
-        for (Imovel imovel : imovelRepository.findAll()){
-            if(imovel.getDeleted()!=null){
-                lista.add(new ImovelResponse(imovel));
-            }
+        Collection<ImovelResponse> lista = new ArrayList<>();
+        for (Imovel imovel : imovelRepository.findAllByDeletedIsNull()){
+            lista.add(new ImovelResponse(imovel));
         }
-
         return lista;
     }
 
